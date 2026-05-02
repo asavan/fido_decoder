@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-color: aliceblue;
+  --first-player: red;
+  --second-player: orange;
+  --field-width: 7;
+  --field-height: 6;
+  --x-coeff: 0;
+  --y-coeff: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+textarea{
+  width: 100%;
+  max-width: 700px;
+}
+
+.hidden {
+  display: none;
+}

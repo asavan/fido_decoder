@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Fido decoder</title>
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Fido decoder">
+    <link id="favicon" rel="icon" href="./images/icon.svg" sizes="any" type="image/svg+xml">
+    <link rel="manifest" href="./app.webmanifest">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="./images/icon.png">
+</head>
+<body>
+<div class="content">
+    <section class="menu">
+        <div id="control-panel" class="control-panel minimized">
+            <div class="panel-header">
+                <!--⛶ ⤭ ◱ 🗖 🗖 -->
+                <button id="butInstall" title="install" class="hidden contrl-btn butInstall">↓</button>
+                <button id="sound" title="sound" class="contrl-btn hidden js-sound-btn">&#128266;</button>
+                <button class="js-help help-btn contrl-btn circled" title="Rules" popovertarget="rulesDialog"></button>
+            </div>
+            <div class="panel-content"></div>
+        </div>
+        <div class="video-barcode"></div>
+    </section>
+    <div class="app">
+        <textarea class="input"></textarea>
+        <p class="hexdecoded"></p>
+        <p class="cbor"></p>
+    </div>
+    <a href="https://cbor.me/">Online decoder</a>
+</div>
+<footer>
+    <div class="log"></div>
+</footer>
+</body>
+
+</html>
