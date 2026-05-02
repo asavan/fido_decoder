@@ -1,4 +1,4 @@
-import {diagnose} from "cbor2";
+import {diagnose, decode as cbrDecode} from "cbor2";
 import {decode, decodeStrByArr} from "./fido_decoder.js";
 
 export default function main(window, document) {
@@ -20,7 +20,10 @@ export default function main(window, document) {
         resEl.textContent = arrStr;
 
         const u8Arr = new Uint8Array(arr);
-        const cborStr = diagnose(u8Arr);
-        resCborEl.textContent = cborStr;
+        const cborMap = cbrDecode(u8Arr);
+        const cborObj = Object.fromEntries(cborMap)
+        const cborStr = JSON.stringify(cborObj, null, 2);
+        console.log(cborObj, cborStr);
+        resCborEl.textContent = diagnose(u8Arr);
     };
 }
