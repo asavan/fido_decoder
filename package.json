@@ -34,7 +34,7 @@
   },
   "homepage": "https://asavan.github.io/fido_decoder/",
   "devDependencies": {
-    "devdeps": "github:asavan/dev-deps#v0.0.14"
+    "devdeps": "github:asavan/dev-deps#v0.0.15"
   },
   "dependencies": {
     "cbor2": "^2.3.0"

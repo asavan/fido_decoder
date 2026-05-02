@@ -1,3 +1,17 @@
+/* eslint-disable @stylistic/max-len */
+
+/*
+import cbor2, math;
+uri='FIDO:/...';
+ns=uri.split('/')[-1];
+bs=(int(n, 10).to_bytes(int(math.log2(10**len(n))//8), 'little') for n in (ns[ii: ii+17] for ii in range(0, len(ns), 17)));
+bbs = list(bs);
+bbss = list(map(lambda x: x.hex(" "), bbs))
+print(" ".join(bbss));
+b = b''.join(bbs);
+print(cbor2.loads(b));
+*/
+
 import test from "node:test";
 import assert from "node:assert/strict";
 import {decodeStr} from "../src/js/fido_decoder.js";
