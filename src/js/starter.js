@@ -1,30 +1,29 @@
 import {diagnose, decode as cbrDecode} from "cbor2";
 import {decode, decodeStrByArr} from "./fido_decoder.js";
 
-const isAllDigits = (str) => {
-    if (str.length === 0) {
+const isAllDigits = (str) => [...str].every(char => char >= "0" && char <= "9");
+
+const isValid = (str) => {
+    if (!str || str.length === 0) {
         return false;
     }
-    return [...str].every(char => char >= "0" && char <= "9");
+    return isAllDigits(str);
 };
 
 export default function main(window, document) {
     const inEl = document.querySelector(".input");
     const resEl = document.querySelector(".hexdecoded");
     const resCborEl = document.querySelector(".cbor");
-    inEl.oninput = () => {
-        let inputVal = inEl.value.toLowerCase();
-        const prefix = "fido:/";
-
+    const showDecoded = () => {
+        let inputVal = inEl.value.toUpperCase();
+        const prefix = "FIDO:/";
+        resEl.textContent = "";
+        resCborEl.textContent = "";
         if (inputVal.startsWith(prefix)) {
             inputVal = inputVal.slice(prefix.length);
-        } else {
-            console.log("inputVal2", inputVal);
         }
         console.log("inputVal", inputVal);
-        if (!isAllDigits(inputVal)) {
-            resEl.textContent = "";
-            resCborEl.textContent = "";
+        if (!isValid(inputVal)) {
             return;
         }
         const arr = decode(inputVal);
@@ -37,4 +36,6 @@ export default function main(window, document) {
         console.log(cborObj, cborStr);
         resCborEl.textContent = diagnose(u8Arr);
     };
+    inEl.oninput = showDecoded;
+    showDecoded();
 }
