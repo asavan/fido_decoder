@@ -12,15 +12,18 @@ export async function cryptoKeyToString(key, window) {
     return `-----BEGIN PUBLIC KEY-----\n${exportedAsBase64}\n-----END PUBLIC KEY-----`;
 }
 
-// Example: Importing a compressed P-256 public key
-export async function importCompressedPublicKey(compressedKeyU8Array, window) {
+export function importCompressedPublicKey(compressedKeyU8Array, window) {
     // The 'raw' format is used for uncompressed (0x04 || X || Y)
     // or compressed (0x02/0x03 || X) formats in many implementations.
     // Note: Standard Web Crypto API 'raw' often expects uncompressed.
     // If this fails, you may need to decompress to uncompressed first
     // or use a WASM library like @noble/curves.
+    //
+    // import { p256 } from '@noble/curves/p256';
+    // Convert Uint8Array directly
+    // const publicKey = p256.ProjectivePoint.fromHex(compressedKeyU8Array);
 
-    return await window.crypto.subtle.importKey(
+    return window.crypto.subtle.importKey(
         "raw", // Format
         compressedKeyU8Array,
         {
