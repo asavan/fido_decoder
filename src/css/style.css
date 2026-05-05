@@ -27,6 +27,18 @@ body {
 textarea{
   width: 100%;
   max-width: 700px;
+  field-sizing: content;
+  min-height: 2lh;
+}
+
+.app {
+  overflow-wrap: break-word; /* Modern standard */
+
+  /* word-wrap: break-word; */
+}
+
+pre {
+  white-space: pre-wrap;
 }
 
 .hidden {

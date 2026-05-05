@@ -47,6 +47,7 @@ export default function main(window, document) {
         const prefix = "FIDO:/";
         resEl.textContent = "";
         resCborEl.textContent = "";
+        resCborDecodedEl.textContent = "";
         if (inputVal.startsWith(prefix)) {
             inputVal = inputVal.slice(prefix.length);
         }
