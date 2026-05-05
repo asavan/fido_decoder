@@ -1,7 +1,7 @@
 import {diagnose, decode as cbrDecode} from "cbor2";
 import {decode, decodeStrByArr} from "./fido_decoder.js";
-
-const isAllDigits = (str) => [...str].every(char => char >= "0" && char <= "9");
+import {isAllDigits, restoreLineBreak} from "./utils.js";
+import {cryptoKeyToString, importCompressedPublicKey} from "./crypto.js";
 
 const isValid = (str) => {
     if (!str || str.length === 0) {
@@ -10,11 +10,39 @@ const isValid = (str) => {
     return isAllDigits(str);
 };
 
+function shortModeToMode(s) {
+    const modeMap = {
+        "mc": "makeCredential",
+        "ga": "getAssertion"
+    };
+    return modeMap[s];
+}
+
+async function decodeMap(map) {
+    const pubKeyCompressed = map.get(0);
+    const pubKey = await importCompressedPublicKey(pubKeyCompressed, window);
+    console.log(pubKey);
+
+    const pubKeyStr = await cryptoKeyToString(pubKey, window);
+
+    const date = new Date(map.get(3)*1000);
+    const answer = {
+        "pubKey": pubKeyStr,
+        "secret": map.get(1).toHex(),
+        "num_servers": map.get(2),
+        "date": date.toString(),
+        "isStateAssisted": map.get(4),
+        "mode": shortModeToMode(map.get(5))
+    };
+    return answer;
+}
+
 export default function main(window, document) {
     const inEl = document.querySelector(".input");
     const resEl = document.querySelector(".hexdecoded");
     const resCborEl = document.querySelector(".cbor");
-    const showDecoded = () => {
+    const resCborDecodedEl = document.querySelector(".cbor_decoded");
+    const showDecoded = async () => {
         let inputVal = inEl.value.toUpperCase();
         const prefix = "FIDO:/";
         resEl.textContent = "";
@@ -35,6 +63,10 @@ export default function main(window, document) {
         const cborStr = JSON.stringify(cborObj, null, 2);
         console.log(cborObj, cborStr);
         resCborEl.textContent = diagnose(u8Arr);
+
+        const decodedCbor = await decodeMap(cborMap);
+        const decodedCborStr = JSON.stringify(decodedCbor, null, 2);
+        resCborDecodedEl.innerText = restoreLineBreak(decodedCborStr);
     };
     inEl.oninput = showDecoded;
     showDecoded();
