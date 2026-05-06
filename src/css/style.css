@@ -25,8 +25,7 @@ body {
 }
 
 textarea{
-  width: 100%;
-  max-width: 700px;
+  width: clamp(200px, 100%, 700px);
   field-sizing: content;
   min-height: 2lh;
 }
