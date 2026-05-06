@@ -36,11 +36,11 @@ textarea{
 }
 
 .app {
+  /* word-wrap: break-word; */
   overflow-wrap: break-word; /* Modern standard */
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* word-wrap: break-word; */
 }
 
 pre {
