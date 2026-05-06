@@ -37,6 +37,7 @@
     "devdeps": "github:asavan/dev-deps#v0.0.15"
   },
   "dependencies": {
-    "cbor2": "^2.3.0"
+    "cbor2": "^2.3.0",
+    "html5-qrcode": "^2.3.8"
   }
 }

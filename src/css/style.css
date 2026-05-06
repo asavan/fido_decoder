@@ -31,9 +31,15 @@ textarea{
   min-height: 2lh;
 }
 
+#reader {
+  max-width: 700px;
+}
+
 .app {
   overflow-wrap: break-word; /* Modern standard */
-
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   /* word-wrap: break-word; */
 }
 
