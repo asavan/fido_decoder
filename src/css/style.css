@@ -22,6 +22,11 @@ body {
 body {
   display: flex;
   flex-direction: column;
+  padding: 10px;
+}
+
+.content {
+  flex: 1 0 auto;
 }
 
 textarea{
